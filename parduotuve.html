@@ -292,6 +292,10 @@ main{padding-top:64px;min-height:100vh}
           <div class="detail-sizes-label">Dydis</div>
           <div class="detail-sizes" id="detail-sizes"></div>
         </div>
+        <div id="detail-colors-wrap" style="display:none">
+          <div class="detail-sizes-label">Spalva</div>
+          <div class="detail-sizes" id="detail-colors"></div>
+        </div>
         <div class="detail-buy-wrap">
           <button class="detail-buy" id="detail-buy" disabled onclick="buyProduct()">PIRKTI</button>
           <div class="detail-buy-note" id="detail-buy-note">Pasirinkite dydį</div>
@@ -381,12 +385,13 @@ const products = [
     img:'project/assets/wear-guards-trim.png',
     imgClass:'card-img-guards',
     detailClass:'detail-img-guards',
-    sizes:[],price:18
+    sizes:['S','L'],colors:['Juoda','Balta'],price:18
   },
 ];
 
 let currentProduct = null;
 let selectedSize = null;
+let selectedColor = null;
 
 /* ── GRID ── */
 function buildGrid() {
@@ -416,6 +421,7 @@ function buildGrid() {
 function showProduct(i) {
   currentProduct = i;
   selectedSize = null;
+  selectedColor = null;
   const p = products[i];
 
   // Background on left panel
@@ -439,11 +445,17 @@ function showProduct(i) {
   const buyBtn = document.getElementById('detail-buy');
   const buyNote = document.getElementById('detail-buy-note');
 
+  const colorsWrap = document.getElementById('detail-colors-wrap');
+  const colorsEl = document.getElementById('detail-colors');
+
   sizesEl.innerHTML = '';
-  if (p.sizes.length > 0) {
+  colorsEl.innerHTML = '';
+
+  const needsSize = p.sizes.length > 0;
+  const needsColor = p.colors && p.colors.length > 0;
+
+  if (needsSize) {
     wrap.style.display = 'block';
-    buyBtn.disabled = true;
-    buyNote.textContent = 'Pasirinkite dydį';
     p.sizes.forEach(sz => {
       const btn = document.createElement('button');
       btn.className = 'size-btn';
@@ -453,9 +465,24 @@ function showProduct(i) {
     });
   } else {
     wrap.style.display = 'none';
-    buyBtn.disabled = false;
-    buyNote.textContent = 'Susisiekite dėl užsakymo';
   }
+
+  if (needsColor) {
+    colorsWrap.style.display = 'block';
+    p.colors.forEach(c => {
+      const btn = document.createElement('button');
+      btn.className = 'size-btn';
+      btn.textContent = c;
+      btn.onclick = () => selectColor(btn, c);
+      colorsEl.appendChild(btn);
+    });
+  } else {
+    colorsWrap.style.display = 'none';
+  }
+
+  const allRequired = !needsSize && !needsColor;
+  buyBtn.disabled = !allRequired;
+  buyNote.textContent = allRequired ? '' : (needsSize && needsColor ? 'Pasirinkite dydį ir spalvą' : needsSize ? 'Pasirinkite dydį' : 'Pasirinkite spalvą');
 
   document.getElementById('view-grid').style.display = 'none';
   document.getElementById('view-detail').style.display = 'block';
@@ -470,12 +497,35 @@ function showGrid() {
   if (location.hash) window.history.pushState({view:'grid'}, '', location.pathname);
 }
 
+function checkCanBuy() {
+  const p = products[currentProduct];
+  const needsSize = p.sizes.length > 0;
+  const needsColor = p.colors && p.colors.length > 0;
+  const ready = (!needsSize || selectedSize) && (!needsColor || selectedColor);
+  document.getElementById('detail-buy').disabled = !ready;
+  if (!ready) {
+    const missingSize = needsSize && !selectedSize;
+    const missingColor = needsColor && !selectedColor;
+    document.getElementById('detail-buy-note').textContent =
+      missingSize && missingColor ? 'Pasirinkite dydį ir spalvą' :
+      missingSize ? 'Pasirinkite dydį' : 'Pasirinkite spalvą';
+  } else {
+    document.getElementById('detail-buy-note').textContent = '';
+  }
+}
+
 function selectSize(btn, size) {
-  document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
+  document.querySelectorAll('#detail-sizes .size-btn').forEach(b => b.classList.remove('selected'));
   btn.classList.add('selected');
   selectedSize = size;
-  document.getElementById('detail-buy').disabled = false;
-  document.getElementById('detail-buy-note').textContent = '';
+  checkCanBuy();
+}
+
+function selectColor(btn, color) {
+  document.querySelectorAll('#detail-colors .size-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  selectedColor = color;
+  checkCanBuy();
 }
 
 async function buyProduct() {
@@ -494,7 +544,7 @@ async function buyProduct() {
       body: JSON.stringify({
         name: p.name.replace('\n', ' '),
         price: p.price,
-        size: selectedSize || ''
+        size: [selectedSize, selectedColor].filter(Boolean).join(', ')
       })
     });
     const data = await res.json();
