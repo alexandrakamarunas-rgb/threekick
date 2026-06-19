@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parduotuvė — KICK wear</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Chakra+Petch:wght@700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Archivo',sans-serif;background:#0A0A0A;color:#EDEDEA;min-height:100vh}
+
+/* ── NAV ── */
+#kc-header{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 32px;height:64px;
+  background:#0A0A0A;border-bottom:1px solid #2a2a2a;
+}
+.kc-logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:#EDEDEA}
+#kc-kick-h{
+  height:24px;aspect-ratio:731/172;
+  background:#EDEDEA;
+  -webkit-mask:url('project/assets/kick-logo-tight.png') center/contain no-repeat;
+  mask:url('project/assets/kick-logo-tight.png') center/contain no-repeat;
+  display:inline-block;flex-shrink:0;
+}
+#kc-wear-h{
+  height:24px;overflow:hidden;
+}
+#kc-wear-h span{
+  display:block;font-family:'Chakra Petch',sans-serif;font-weight:700;
+  font-size:calc(24px * 2);line-height:1;color:#EDEDEA;
+  transform:translateY(-0.34em);
+}
+nav{display:flex;gap:28px}
+nav a{font-family:'Archivo',sans-serif;font-weight:600;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#7E7C77;text-decoration:none;transition:color .15s}
+nav a:hover{color:#EDEDEA}
+nav a.active{color:#EDEDEA}
+#kc-cart-h{font-family:'Archivo',sans-serif;font-weight:600;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#7E7C77;cursor:pointer;text-decoration:none;transition:color .15s}
+#kc-cart-h:hover{color:#EDEDEA}
+#kc-menu{display:none;background:none;border:none;cursor:pointer;padding:4px;color:#EDEDEA}
+#kc-mobile-nav{display:none;position:fixed;inset:0;top:64px;z-index:99;background:#0A0A0A;padding:32px;flex-direction:column;gap:24px}
+#kc-mobile-nav a{font-family:'Archivo',sans-serif;font-weight:700;font-size:22px;letter-spacing:.04em;text-transform:uppercase;color:#7E7C77;text-decoration:none}
+#kc-mobile-nav a.active{color:#EDEDEA}
+
+/* ── PAGE LAYOUT ── */
+main{padding-top:64px;min-height:100vh}
+
+/* ── GRID VIEW ── */
+#view-grid{display:block}
+.grid-header{
+  padding:40px 32px 28px;
+  display:flex;align-items:baseline;gap:16px;
+  border-bottom:1px solid #2a2a2a;
+}
+.grid-title{font-family:'Chakra Petch',sans-serif;font-size:clamp(22px,3vw,32px);font-weight:700;letter-spacing:.02em;color:#EDEDEA}
+.grid-count{font-size:13px;color:#7E7C77;font-weight:500}
+.product-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  border-left:1px solid #2a2a2a;
+}
+.product-card{
+  position:relative;
+  aspect-ratio:1/1;
+  overflow:hidden;
+  cursor:pointer;
+  border-right:1px solid #2a2a2a;
+  border-bottom:1px solid #2a2a2a;
+}
+.product-card-inner{
+  position:absolute;inset:0;
+  transition:transform .35s cubic-bezier(.22,.61,.36,1);
+}
+.product-card:hover .product-card-inner{transform:scale(1.03)}
+.card-bg{position:absolute;inset:0}
+.card-img{
+  position:absolute;
+  bottom:0;left:50%;transform:translateX(-50%);
+  width:auto;height:84%;
+  object-fit:contain;object-position:center bottom;
+}
+.card-img.card-img-cover{
+  width:100%;height:100%;left:0;transform:none;
+  object-fit:cover;
+}
+.card-img.card-img-guards{
+  left:30%;top:20%;
+  width:65%;height:53%;
+  bottom:auto;transform:none;
+  object-fit:contain;
+}
+.card-overlay{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:12px 14px 14px;
+  background:linear-gradient(to top,rgba(0,0,0,.65) 0%,transparent 100%);
+}
+.card-name{
+  font-family:'Chakra Petch',sans-serif;font-weight:700;
+  font-size:clamp(11px,1.1vw,16px);line-height:1.2;
+  color:#fff;white-space:pre-line;
+}
+.card-spec{
+  font-size:clamp(9px,.8vw,12px);font-weight:500;
+  color:rgba(255,255,255,.65);margin-top:3px;
+}
+
+/* ── DETAIL VIEW ── */
+#view-detail{display:none}
+.detail-back{
+  display:flex;align-items:center;gap:10px;
+  padding:20px 32px;
+  font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+  color:#7E7C77;cursor:pointer;border-bottom:1px solid #2a2a2a;
+  background:#0A0A0A;
+  transition:color .15s;user-select:none;
+}
+.detail-back:hover{color:#EDEDEA}
+.detail-back-arrow{font-size:18px;line-height:1}
+.detail-layout{
+  display:flex;min-height:calc(100vh - 64px - 61px);
+}
+
+/* LEFT PANEL */
+.detail-left{
+  position:sticky;top:125px;
+  flex:0 0 55%;height:calc(100vh - 125px);
+  overflow:hidden;display:flex;align-items:flex-end;justify-content:center;
+}
+.detail-fig{
+  position:absolute;inset:0;display:flex;
+  align-items:flex-end;justify-content:center;
+  overflow:hidden;
+}
+.detail-fig img{
+  max-width:100%;max-height:100%;
+  object-fit:contain;object-position:center bottom;
+}
+.detail-fig img.detail-img-cover{
+  width:100%;height:100%;
+  object-fit:cover;object-position:center;
+}
+.detail-fig img.detail-img-guards{
+  position:absolute;
+  left:30%;top:20%;width:65%;height:53%;
+  object-fit:contain;object-position:center;
+}
+
+/* RIGHT PANEL */
+.detail-right{
+  flex:0 0 45%;
+  padding:40px 40px 60px;
+  background:#0A0A0A;
+  border-left:1px solid #2a2a2a;
+  display:flex;flex-direction:column;gap:32px;
+}
+.detail-name{
+  font-family:'Chakra Petch',sans-serif;font-weight:700;
+  font-size:clamp(28px,3.5vw,52px);line-height:1.05;
+  white-space:pre-line;color:#EDEDEA;
+}
+.detail-spec{
+  font-size:14px;font-weight:600;letter-spacing:.03em;color:#7E7C77;
+  border-top:1px solid #2a2a2a;padding-top:20px;
+}
+.detail-desc{
+  font-size:15px;font-weight:500;line-height:1.6;color:#EDEDEA;
+}
+.detail-sizes-label{
+  font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#7E7C77;
+  margin-bottom:12px;
+}
+.detail-sizes{display:flex;flex-wrap:wrap;gap:8px}
+.size-btn{
+  min-width:52px;padding:10px 14px;
+  border:1px solid #2a2a2a;background:transparent;
+  font-family:'Archivo',sans-serif;font-size:13px;font-weight:700;letter-spacing:.06em;
+  color:#7E7C77;cursor:pointer;text-transform:uppercase;
+  transition:all .15s;
+}
+.size-btn:hover{border-color:#EDEDEA;color:#EDEDEA}
+.size-btn.selected{border-color:#EDEDEA;background:#EDEDEA;color:#0A0A0A}
+
+.detail-buy-wrap{margin-top:auto;padding-top:16px;border-top:1px solid #2a2a2a}
+.detail-buy{
+  display:block;width:100%;padding:18px 24px;
+  background:#D32528;border:none;
+  font-family:'Archivo',sans-serif;font-size:15px;font-weight:800;letter-spacing:.08em;
+  text-transform:uppercase;color:#fff;cursor:pointer;
+  transition:background .15s, transform .15s, opacity .15s;
+}
+.detail-buy:not(:disabled):hover{background:#B01E20;transform:translateY(-2px)}
+.detail-buy:disabled{opacity:.35;cursor:not-allowed;background:#D32528}
+.detail-buy-note{
+  font-size:12px;color:#7E7C77;font-weight:500;margin-top:10px;text-align:center;
+}
+
+/* ── MOBILE ── */
+@media(max-width:1080px){
+  .product-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:760px){
+  #kc-header{padding:0 20px}
+  nav{display:none}
+  #kc-cart-h{display:none}
+  #kc-menu{display:block}
+  .grid-header{padding:28px 20px 18px}
+  .product-grid{grid-template-columns:repeat(2,1fr)}
+  .card-overlay{padding:8px 10px 10px}
+  .detail-layout{flex-direction:column}
+  .detail-left{
+    position:relative;top:0;height:50vw;flex:none;
+    width:100%;
+  }
+  .detail-right{
+    flex:none;padding:24px 20px 48px;border-left:none;
+    border-top:1px solid #2a2a2a;gap:22px;
+  }
+  .detail-back{padding:14px 20px}
+  .detail-buy{padding:16px}
+}
+@media(max-width:440px){
+  .product-grid{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<header id="kc-header">
+  <button id="kc-menu" aria-label="Meniu" onclick="toggleMenu()">
+    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+      <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+    </svg>
+  </button>
+  <a href="index.html" class="kc-logo" style="text-decoration:none">
+    <span id="kc-kick-h"></span>
+    <div id="kc-wear-h"><span>wear</span></div>
+  </a>
+  <nav>
+    <a href="index.html">HOME</a>
+    <a href="parduotuve.html" class="active">PARDUOTUVĖ</a>
+    <a href="komandoms.html">KOMANDOMS</a>
+  </nav>
+  <a href="#" id="kc-cart-h">KREPŠELIS</a>
+</header>
+
+<div id="kc-mobile-nav">
+  <a href="index.html">HOME</a>
+  <a href="parduotuve.html" class="active">PARDUOTUVĖ</a>
+  <a href="komandoms.html">KOMANDOMS</a>
+</div>
+
+<main>
+  <!-- GRID VIEW -->
+  <div id="view-grid">
+    <div class="grid-header">
+      <span class="grid-title">Parduotuvė</span>
+      <span class="grid-count" id="grid-count">8 produktai</span>
+    </div>
+    <div class="product-grid" id="product-grid"></div>
+  </div>
+
+  <!-- DETAIL VIEW -->
+  <div id="view-detail">
+    <div class="detail-back" onclick="showGrid()">
+      <span class="detail-back-arrow">←</span>
+      <span>Visi produktai</span>
+    </div>
+    <div class="detail-layout">
+      <div class="detail-left" id="detail-left">
+        <div class="detail-fig" id="detail-fig">
+          <img id="detail-img" src="" alt="">
+        </div>
+      </div>
+      <div class="detail-right">
+        <div class="detail-name" id="detail-name"></div>
+        <div class="detail-spec" id="detail-spec"></div>
+        <div class="detail-desc" id="detail-desc"></div>
+        <div id="detail-sizes-wrap">
+          <div class="detail-sizes-label">Dydis</div>
+          <div class="detail-sizes" id="detail-sizes"></div>
+        </div>
+        <div class="detail-buy-wrap">
+          <button class="detail-buy" id="detail-buy" disabled onclick="buyProduct()">PIRKTI</button>
+          <div class="detail-buy-note" id="detail-buy-note">Pasirinkite dydį</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+const products = [
+  {
+    name:'Medvilninis\ndžemperis',
+    specB:'Kirpimas: tiesus',
+    desc:'100% medvilnė. Klasikinis tiesaus kirpimo džemperis su KICK wear atributika.',
+    bg:'#D32528',color:'#F3DE1B',
+    img:'project/assets/hero-cutout.png',
+    imgClass:'card-img-cover',
+    detailClass:'detail-img-cover',
+    sizes:['S','M','L','XL','XXL','XXXL']
+  },
+  {
+    name:'Oversize\nmarškinėliai',
+    specB:'Medvilna 100%',
+    desc:'200 gsm. Heavyweight. Dropped shoulders. Storo audioklio marškinėliai su KICK wear logotipu.',
+    bg:'#0A0A0A',color:'#FFFFFF',
+    img:'project/assets/wear-tee-waist.png',
+    imgClass:'',
+    detailClass:'',
+    sizes:['S','M','L','XL','XXL','XXXL']
+  },
+  {
+    name:'Pilkas\nkomplektas',
+    specB:'Džemperis su gobtuvu ir kelnės',
+    desc:'Minkštas flisas. Džemperis su gobtuvu ir kelnės iš to paties audinio. Patogus kasdieniam nešiojimui.',
+    bg:'#EDEDEA',color:'#0A0A0A',
+    img:'project/assets/wear-grey-waist.png',
+    imgClass:'',
+    detailClass:'',
+    sizes:['S','M','L','XL','XXL','XXXL']
+  },
+  {
+    name:'Juodas\nkomplektas',
+    specB:'Džemperis su gobtuvu ir kelnės',
+    desc:'Klasikinis juodas komplektas. Džemperis su gobtuvu ir kelnės — universalus sportinis stilius.',
+    bg:'#F2C200',color:'#D32528',
+    img:'project/assets/wear-black-waist.png',
+    imgClass:'',
+    detailClass:'',
+    sizes:['S','M','L','XL','XXL','XXXL']
+  },
+  {
+    name:'Pūkinė\nliemenė',
+    specB:'Liemenė ir kepurė',
+    desc:'Lengvas šiltinimas. Pūkinė liemenė ir kepurė — idealus rinkinys šaltesniems rytams.',
+    bg:'#2A211C',color:'#F4F1EA',
+    img:'project/assets/wear-vest-waist.png',
+    imgClass:'',
+    detailClass:'',
+    sizes:['S','M','L','XL','XXL','XXXL']
+  },
+  {
+    name:'Raudonas\ndžemperis',
+    specB:'Džemperis su gobtuvu',
+    desc:'Klasikinis gobtuvas raudonos spalvos. KICK wear logotipas ant krūtinės.',
+    bg:'#F2C200',color:'#0A0A0A',
+    img:'project/assets/wear-hoodie-waist.png',
+    imgClass:'',
+    detailClass:'',
+    sizes:['S','M','L','XL','XXL','XXXL']
+  },
+  {
+    name:'Marškinėlių\nkomplektas',
+    specB:'3 vienetai komplekte',
+    desc:'Trys baziniai marškinėliai skirtingų spalvų. Heavyweight, 200 gsm. Dropped shoulders.',
+    bg:'#0A0A0A',color:'#FFFFFF',
+    img:'project/assets/wear-tee2-waist.png',
+    imgClass:'',
+    detailClass:'',
+    sizes:['S','M','L','XL','XXL','XXXL']
+  },
+  {
+    name:'Blauzdų\napsaugos',
+    specB:'Korinė apsauga, 2 poros',
+    desc:'Lengvos, kvėpuoja. Korinės struktūros blauzdų apsaugos — maksimali apsauga minimalia mase.',
+    bg:'#3A3A37',color:'#FFFFFF',
+    img:'project/assets/wear-guards-trim.png',
+    imgClass:'card-img-guards',
+    detailClass:'detail-img-guards',
+    sizes:[]
+  },
+];
+
+let currentProduct = null;
+let selectedSize = null;
+
+/* ── GRID ── */
+function buildGrid() {
+  const grid = document.getElementById('product-grid');
+  grid.innerHTML = '';
+  products.forEach((p, i) => {
+    const card = document.createElement('div');
+    card.className = 'product-card';
+    card.onclick = () => showProduct(i);
+
+    let imgClass = 'card-img' + (p.imgClass ? ' '+p.imgClass : '');
+
+    card.innerHTML = `
+      <div class="product-card-inner">
+        <div class="card-bg" style="background:${p.bg}"></div>
+        <img class="${imgClass}" src="${p.img}" alt="${p.name.replace('\n',' ')}">
+        <div class="card-overlay">
+          <div class="card-name">${p.name}</div>
+          <div class="card-spec">${p.specB}</div>
+        </div>
+      </div>`;
+    grid.appendChild(card);
+  });
+}
+
+/* ── DETAIL ── */
+function showProduct(i) {
+  currentProduct = i;
+  selectedSize = null;
+  const p = products[i];
+
+  // Background on left panel
+  document.getElementById('detail-left').style.background = p.bg;
+
+  // Image
+  const img = document.getElementById('detail-img');
+  img.src = p.img;
+  img.alt = p.name.replace('\n', ' ');
+  img.className = p.detailClass || '';
+
+  // Text
+  document.getElementById('detail-name').textContent = p.name;
+  document.getElementById('detail-spec').textContent = p.specB;
+  document.getElementById('detail-desc').textContent = p.desc;
+
+  // Sizes
+  const wrap = document.getElementById('detail-sizes-wrap');
+  const sizesEl = document.getElementById('detail-sizes');
+  const buyBtn = document.getElementById('detail-buy');
+  const buyNote = document.getElementById('detail-buy-note');
+
+  sizesEl.innerHTML = '';
+  if (p.sizes.length > 0) {
+    wrap.style.display = 'block';
+    buyBtn.disabled = true;
+    buyNote.textContent = 'Pasirinkite dydį';
+    p.sizes.forEach(sz => {
+      const btn = document.createElement('button');
+      btn.className = 'size-btn';
+      btn.textContent = sz;
+      btn.onclick = () => selectSize(btn, sz);
+      sizesEl.appendChild(btn);
+    });
+  } else {
+    wrap.style.display = 'none';
+    buyBtn.disabled = false;
+    buyNote.textContent = 'Susisiekite dėl užsakymo';
+  }
+
+  document.getElementById('view-grid').style.display = 'none';
+  document.getElementById('view-detail').style.display = 'block';
+  window.scrollTo(0,0);
+  window.history.pushState({view:'detail',idx:i}, '', '#produktas-'+i);
+}
+
+function showGrid() {
+  document.getElementById('view-detail').style.display = 'none';
+  document.getElementById('view-grid').style.display = 'block';
+  window.scrollTo(0,0);
+  if (location.hash) window.history.pushState({view:'grid'}, '', location.pathname);
+}
+
+function selectSize(btn, size) {
+  document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  selectedSize = size;
+  document.getElementById('detail-buy').disabled = false;
+  document.getElementById('detail-buy-note').textContent = '';
+}
+
+function buyProduct() {
+  const p = products[currentProduct];
+  const name = p.name.replace('\n', ' ');
+  const subject = selectedSize
+    ? `Užsakymas: ${name} — Dydis: ${selectedSize}`
+    : `Užsakymas: ${name}`;
+  window.location.href = `mailto:info@threekickwear.com?subject=${encodeURIComponent(subject)}`;
+}
+
+/* ── MOBILE NAV ── */
+let menuOpen = false;
+function toggleMenu() {
+  menuOpen = !menuOpen;
+  document.getElementById('kc-mobile-nav').style.display = menuOpen ? 'flex' : 'none';
+}
+
+/* ── BROWSER BACK ── */
+window.addEventListener('popstate', e => {
+  if (e.state && e.state.view === 'detail') {
+    showProduct(e.state.idx);
+  } else {
+    document.getElementById('view-detail').style.display = 'none';
+    document.getElementById('view-grid').style.display = 'block';
+  }
+});
+
+/* ── INIT ── */
+buildGrid();
+
+// Handle direct hash links
+if (location.hash.startsWith('#produktas-')) {
+  const i = parseInt(location.hash.replace('#produktas-',''));
+  if (!isNaN(i) && i >= 0 && i < products.length) showProduct(i);
+}
+</script>
+</body>
+</html>
