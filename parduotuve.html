@@ -197,6 +197,14 @@ main{padding-top:64px;min-height:100vh}
 .detail-buy-note{
   font-size:12px;color:#7E7C77;font-weight:500;margin-top:10px;text-align:center;
 }
+.detail-price{
+  font-family:'Chakra Petch',sans-serif;font-weight:700;
+  font-size:clamp(22px,2.5vw,34px);color:#EDEDEA;
+}
+.card-price{
+  font-family:'Chakra Petch',sans-serif;font-weight:700;
+  font-size:clamp(10px,.95vw,14px);color:#fff;margin-top:2px;
+}
 
 /* ── MOBILE ── */
 @media(max-width:1080px){
@@ -277,6 +285,7 @@ main{padding-top:64px;min-height:100vh}
       </div>
       <div class="detail-right">
         <div class="detail-name" id="detail-name"></div>
+        <div class="detail-price" id="detail-price"></div>
         <div class="detail-spec" id="detail-spec"></div>
         <div class="detail-desc" id="detail-desc"></div>
         <div id="detail-sizes-wrap">
@@ -302,7 +311,7 @@ const products = [
     img:'project/assets/hero-cutout.png',
     imgClass:'card-img-cover',
     detailClass:'detail-img-cover',
-    sizes:['S','M','L','XL','XXL','XXXL']
+    sizes:['S','M','L','XL','XXL','XXXL'],price:35
   },
   {
     name:'Oversize\nmarškinėliai',
@@ -312,7 +321,7 @@ const products = [
     img:'project/assets/wear-tee-waist.png',
     imgClass:'',
     detailClass:'',
-    sizes:['S','M','L','XL','XXL','XXXL']
+    sizes:['S','M','L','XL','XXL','XXXL'],price:33
   },
   {
     name:'Pilkas\nkomplektas',
@@ -322,7 +331,7 @@ const products = [
     img:'project/assets/wear-grey-waist.png',
     imgClass:'',
     detailClass:'',
-    sizes:['S','M','L','XL','XXL','XXXL']
+    sizes:['S','M','L','XL','XXL','XXXL'],price:77
   },
   {
     name:'Juodas\nkomplektas',
@@ -332,7 +341,7 @@ const products = [
     img:'project/assets/wear-black-waist.png',
     imgClass:'',
     detailClass:'',
-    sizes:['S','M','L','XL','XXL','XXXL']
+    sizes:['S','M','L','XL','XXL','XXXL'],price:77
   },
   {
     name:'Pūkinė\nliemenė',
@@ -342,7 +351,7 @@ const products = [
     img:'project/assets/wear-vest-waist.png',
     imgClass:'',
     detailClass:'',
-    sizes:['S','M','L','XL','XXL','XXXL']
+    sizes:['S','M','L','XL','XXL','XXXL'],price:44
   },
   {
     name:'Raudonas\ndžemperis',
@@ -352,7 +361,7 @@ const products = [
     img:'project/assets/wear-hoodie-waist.png',
     imgClass:'',
     detailClass:'',
-    sizes:['S','M','L','XL','XXL','XXXL']
+    sizes:['S','M','L','XL','XXL','XXXL'],price:35
   },
   {
     name:'Marškinėlių\nkomplektas',
@@ -362,7 +371,7 @@ const products = [
     img:'project/assets/wear-tee2-waist.png',
     imgClass:'',
     detailClass:'',
-    sizes:['S','M','L','XL','XXL','XXXL']
+    sizes:['S','M','L','XL','XXL','XXXL'],price:33
   },
   {
     name:'Blauzdų\napsaugos',
@@ -372,7 +381,7 @@ const products = [
     img:'project/assets/wear-guards-trim.png',
     imgClass:'card-img-guards',
     detailClass:'detail-img-guards',
-    sizes:[]
+    sizes:[],price:18
   },
 ];
 
@@ -396,7 +405,7 @@ function buildGrid() {
         <img class="${imgClass}" src="${p.img}" alt="${p.name.replace('\n',' ')}">
         <div class="card-overlay">
           <div class="card-name">${p.name}</div>
-          <div class="card-spec">${p.specB}</div>
+          <div class="card-price">€${p.price}</div>
         </div>
       </div>`;
     grid.appendChild(card);
@@ -420,6 +429,7 @@ function showProduct(i) {
 
   // Text
   document.getElementById('detail-name').textContent = p.name;
+  document.getElementById('detail-price').textContent = '€' + p.price + '.00';
   document.getElementById('detail-spec').textContent = p.specB;
   document.getElementById('detail-desc').textContent = p.desc;
 
@@ -468,13 +478,37 @@ function selectSize(btn, size) {
   document.getElementById('detail-buy-note').textContent = '';
 }
 
-function buyProduct() {
+async function buyProduct() {
   const p = products[currentProduct];
-  const name = p.name.replace('\n', ' ');
-  const subject = selectedSize
-    ? `Užsakymas: ${name} — Dydis: ${selectedSize}`
-    : `Užsakymas: ${name}`;
-  window.location.href = `mailto:info@threekickwear.com?subject=${encodeURIComponent(subject)}`;
+  const btn = document.getElementById('detail-buy');
+  const note = document.getElementById('detail-buy-note');
+
+  btn.disabled = true;
+  btn.textContent = 'KRAUNAMA...';
+  note.textContent = '';
+
+  try {
+    const res = await fetch('checkout.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: p.name.replace('\n', ' '),
+        price: p.price,
+        size: selectedSize || ''
+      })
+    });
+    const data = await res.json();
+    if (data.url) {
+      window.location.href = data.url;
+    } else {
+      throw new Error(data.error || 'Klaida');
+    }
+  } catch (err) {
+    btn.disabled = false;
+    btn.textContent = 'PIRKTI';
+    note.textContent = 'Klaida. Bandykite dar kartą.';
+    note.style.color = '#D32528';
+  }
 }
 
 /* ── MOBILE NAV ── */
@@ -496,6 +530,16 @@ window.addEventListener('popstate', e => {
 
 /* ── INIT ── */
 buildGrid();
+
+// Payment success banner
+if (new URLSearchParams(location.search).get('success') === '1') {
+  const banner = document.createElement('div');
+  banner.style.cssText = 'position:fixed;top:64px;left:0;right:0;z-index:200;background:#1a4a1a;color:#7ddb7d;padding:14px 32px;font-size:13px;font-weight:700;letter-spacing:.06em;text-align:center;border-bottom:1px solid #2d6b2d;';
+  banner.textContent = 'Apmokėjimas gautas. Ačiū už užsakymą!';
+  document.body.appendChild(banner);
+  history.replaceState(null,'',location.pathname);
+  setTimeout(() => banner.remove(), 6000);
+}
 
 // Handle direct hash links
 if (location.hash.startsWith('#produktas-')) {
