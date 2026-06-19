@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Komandoms — KICK wear</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; background:#101010; }
+  ::selection{ background:#D32528; color:#F4F1EA; }
+
+  .km-cat-link:hover .km-cat-img{
+    filter:grayscale(0) contrast(1) brightness(1);
+    transform:scale(1.04);
+  }
+  .km-cta-btn:hover{
+    transform:translateY(-2px);
+    background-color:#E8312F;
+  }
+
+  @media (max-width:860px){
+    .km-hero-grid{ grid-template-columns:1fr!important; gap:40px!important; }
+    .km-text-right{ text-align:left!important; align-items:flex-start!important; }
+    .km-collage{ height:clamp(380px,86vw,520px)!important; }
+    .km-split{ grid-template-columns:1fr!important; gap:32px!important; }
+    .km-cats{ grid-template-columns:1fr 1fr!important; }
+  }
+  @media (max-width:520px){
+    .km-cats{ grid-template-columns:1fr!important; }
+    .km-nav-links{ display:none!important; }
+  }
+</style>
+</head>
+<body>
+
+<div style="font-family:'Archivo',sans-serif; background:#101010; color:#CBC9C4; -webkit-font-smoothing:antialiased;">
+
+  <!-- HEADER -->
+  <header style="position:sticky; top:0; z-index:50; display:flex; align-items:center; justify-content:space-between; padding:22px 40px; background:rgba(16,16,16,.9); backdrop-filter:blur(6px);">
+    <nav class="km-nav-links" style="display:flex; align-items:center; gap:30px; font-size:12px; font-weight:700; letter-spacing:.1em;">
+      <a href="index.html" style="color:#7E7C77; text-decoration:none;">HOME</a>
+      <a href="#" style="color:#7E7C77; text-decoration:none;">PARDUOTUVĖ</a>
+      <a href="komandoms.html" style="color:#E6E4DF; text-decoration:none;">KOMANDOMS</a>
+    </nav>
+    <span style="display:flex; align-items:flex-start; gap:4px;">
+      <span style="height:15px; aspect-ratio:731/172; background:#8C8A86; -webkit-mask:url('project/assets/kick-logo-tight.png') center/contain no-repeat; mask:url('project/assets/kick-logo-tight.png') center/contain no-repeat; display:block;"></span>
+      <span style="font-size:8px; font-weight:600; color:#8C8A86;">®</span>
+    </span>
+    <a href="#" style="color:#7E7C77; text-decoration:none; font-size:12px; font-weight:700; letter-spacing:.1em;">KREPŠELIS</a>
+  </header>
+
+  <!-- HERO -->
+  <section style="position:relative; padding:clamp(80px,10vw,150px) 40px clamp(72px,9vw,120px);">
+    <div style="display:flex; justify-content:center; margin-bottom:clamp(56px,7vw,96px);">
+      <span style="display:flex; align-items:flex-start; gap:5px;">
+        <span style="height:26px; aspect-ratio:731/172; background:#8C8A86; -webkit-mask:url('project/assets/kick-logo-tight.png') center/contain no-repeat; mask:url('project/assets/kick-logo-tight.png') center/contain no-repeat; display:block;"></span>
+        <span style="font-size:11px; font-weight:600; color:#8C8A86;">®</span>
+      </span>
+    </div>
+
+    <div class="km-hero-grid" style="max-width:1260px; margin:0 auto; display:grid; grid-template-columns:1.05fr .95fr; gap:clamp(40px,5vw,72px); align-items:center;">
+
+      <!-- Photo collage -->
+      <div class="km-collage" style="position:relative; height:clamp(440px,46vw,580px);">
+        <img src="project/assets/team/g2.avif" alt="" style="position:absolute; left:0; top:0; width:64%; height:84%; object-fit:cover; object-position:50% 28%; filter:grayscale(1) contrast(1.05) brightness(.92); border:8px solid #F4F1EA;">
+        <img src="project/assets/team/g1.avif" alt="" style="position:absolute; right:0; bottom:0; width:60%; height:74%; object-fit:cover; object-position:50% 18%; border:8px solid #F4F1EA; box-shadow:-24px -24px 60px rgba(16,16,16,.7);">
+      </div>
+
+      <!-- Text -->
+      <div class="km-text-right" style="display:flex; flex-direction:column; align-items:flex-end; text-align:right;">
+        <h1 style="margin:0; font-family:'Archivo',sans-serif; font-weight:500; font-size:clamp(26px,2.7vw,38px); line-height:1.18; letter-spacing:-.01em; color:#C7C5C0; max-width:18ch;">Sportinės aprangos gamyba <span style="color:#F4F1EA; font-weight:700;">komandoms</span> ir individualiems užsakymams.</h1>
+        <p style="margin:34px 0 0; max-width:46ch; font-size:clamp(14px,1.15vw,16px); font-weight:400; line-height:1.62; color:#76746F;">
+          <span style="font-family:'Chakra Petch',sans-serif; font-weight:700; color:#D32528; letter-spacing:.01em;">THREE KICK&nbsp;©</span>&nbsp;&nbsp;— siuvame kokybiškas aprangas su jūsų logotipu, spalvomis ir numeriais pagal individualų dizainą. Nėra minimalaus užsakymo kiekio, tinkame tiek didelėms komandoms, tiek pavieniam sportininkui.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- NUMBERS + PROCESS -->
+  <section style="padding:clamp(40px,5vw,72px) 40px clamp(72px,9vw,120px);">
+    <div style="max-width:1260px; margin:0 auto;">
+
+      <!-- Numbers -->
+      <div class="km-split" style="display:grid; grid-template-columns:1fr 1fr; gap:clamp(32px,5vw,80px); padding-bottom:clamp(48px,6vw,80px);">
+        <div style="display:flex; align-items:flex-start; gap:24px;">
+          <span style="font-family:'Chakra Petch',sans-serif; font-weight:700; font-size:clamp(60px,7vw,104px); line-height:.82; color:#D32528;">0</span>
+          <div style="padding-top:10px;">
+            <div style="font-size:12px; font-weight:800; letter-spacing:.14em; color:#C7C5C0; text-transform:uppercase; margin-bottom:10px;">Minimalus užsakymas</div>
+            <p style="margin:0; max-width:34ch; font-size:14px; line-height:1.6; color:#76746F;">Vienodos sąlygos didelei komandai ir pavieniam sportininkui.</p>
+          </div>
+        </div>
+        <div style="display:flex; align-items:flex-start; gap:24px;">
+          <span style="font-family:'Chakra Petch',sans-serif; font-weight:700; font-size:clamp(60px,7vw,104px); line-height:.82; color:#F2C200; white-space:nowrap;">10–20</span>
+          <div style="padding-top:10px;">
+            <div style="font-size:12px; font-weight:800; letter-spacing:.14em; color:#C7C5C0; text-transform:uppercase; margin-bottom:10px;">Dienos iki pristatymo</div>
+            <p style="margin:0; max-width:34ch; font-size:14px; line-height:1.6; color:#76746F;">Po užsakymo pateikimo apranga jau jūsų rankose.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Process -->
+      <div style="border-top:1px solid #2A2A28; padding-top:clamp(40px,5vw,64px);">
+        <div class="km-split" style="display:grid; grid-template-columns:.8fr 2.2fr; gap:clamp(28px,4vw,64px); margin-bottom:clamp(36px,4vw,56px);">
+          <div style="font-size:12px; font-weight:800; letter-spacing:.14em; color:#D32528; text-transform:uppercase;">Gamybos eiga</div>
+          <h2 style="margin:0; font-family:'Archivo',sans-serif; font-weight:500; font-size:clamp(20px,2vw,28px); line-height:1.3; color:#C7C5C0; max-width:42ch;">Trys etapai — <span style="color:#F4F1EA; font-weight:700;">užsakymas</span>, <span style="color:#F4F1EA; font-weight:700;">dizainas</span> ir <span style="color:#F4F1EA; font-weight:700;">gamyba</span>. Visuose procesuose užsakovas dalyvauja ir koreguoja kiekvieną žingsnį, todėl rezultatas atitinka lūkesčius.</h2>
+        </div>
+        <div class="km-split" style="display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(24px,3vw,48px);">
+          <div>
+            <span style="font-family:'Chakra Petch',sans-serif; font-weight:700; font-size:40px; color:#3E3E3B;">01</span>
+            <div style="font-size:16px; font-weight:800; letter-spacing:.05em; text-transform:uppercase; color:#E6E4DF; margin:16px 0 10px;">Užsakymas</div>
+            <p style="margin:0; font-size:13.5px; line-height:1.6; color:#76746F;">Aptariame poreikį, kiekį ir terminus. Pateikiate logotipą, spalvas ir numerius.</p>
+          </div>
+          <div>
+            <span style="font-family:'Chakra Petch',sans-serif; font-weight:700; font-size:40px; color:#3E3E3B;">02</span>
+            <div style="font-size:16px; font-weight:800; letter-spacing:.05em; text-transform:uppercase; color:#E6E4DF; margin:16px 0 10px;">Dizainas</div>
+            <p style="margin:0; font-size:13.5px; line-height:1.6; color:#76746F;">Paruošiame individualų maketą. Tvirtinate ir koreguojate kiekvieną detalę.</p>
+          </div>
+          <div>
+            <span style="font-family:'Chakra Petch',sans-serif; font-weight:700; font-size:40px; color:#3E3E3B;">03</span>
+            <div style="font-size:16px; font-weight:800; letter-spacing:.05em; text-transform:uppercase; color:#E6E4DF; margin:16px 0 10px;">Gamyba</div>
+            <p style="margin:0; font-size:13.5px; line-height:1.6; color:#76746F;">Pasiuvame kokybišką aprangą ir pristatome tiesiai į jūsų rankas.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORIES -->
+  <section style="padding:0 40px clamp(72px,9vw,120px);">
+    <div style="max-width:1260px; margin:0 auto;">
+      <div style="display:flex; align-items:baseline; gap:18px; margin-bottom:clamp(28px,3vw,44px);">
+        <span style="font-size:12px; font-weight:800; letter-spacing:.14em; color:#D32528; text-transform:uppercase;">Kam siuvame</span>
+        <span style="flex:1; height:1px; background:#2A2A28;"></span>
+      </div>
+      <div class="km-cats" style="display:grid; grid-template-columns:repeat(4,1fr); gap:14px;">
+
+        <a href="#" class="km-cat-link" style="position:relative; display:block; overflow:hidden; text-decoration:none;">
+          <img class="km-cat-img" src="project/assets/team/g2.avif" alt="Futbolas" style="width:100%; height:clamp(300px,26vw,360px); object-fit:cover; object-position:50% 28%; filter:grayscale(1) contrast(1.05) brightness(.9); display:block; transition:filter .4s ease, transform .5s cubic-bezier(.2,.8,.2,1);">
+          <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(16,16,16,.82) 0%, rgba(16,16,16,0) 50%); pointer-events:none;"></div>
+          <div style="position:absolute; left:18px; right:18px; bottom:16px; display:flex; align-items:baseline; justify-content:space-between; pointer-events:none;">
+            <span style="font-size:15px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; color:#F4F1EA;">Futbolas</span>
+            <span style="font-family:'Chakra Petch',sans-serif; font-weight:700; font-size:15px; color:#D32528;">01</span>
+          </div>
+        </a>
+
+        <a href="#" class="km-cat-link" style="position:relative; display:block; overflow:hidden; text-decoration:none;">
+          <img class="km-cat-img" src="project/assets/team/g1.avif" alt="Krepšinis" style="width:100%; height:clamp(300px,26vw,360px); object-fit:cover; object-position:50% 20%; filter:grayscale(1) contrast(1.05) brightness(.9); display:block; transition:filter .4s ease, transform .5s cubic-bezier(.2,.8,.2,1);">
+          <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(16,16,16,.82) 0%, rgba(16,16,16,0) 50%); pointer-events:none;"></div>
+          <div style="position:absolute; left:18px; right:18px; bottom:16px; display:flex; align-items:baseline; justify-content:space-between; pointer-events:none;">
+            <span style="font-size:15px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; color:#F4F1EA;">Krepšinis</span>
+            <span style="font-family:'Chakra Petch',sans-serif; font-weight:700; font-size:15px; color:#D32528;">02</span>
+          </div>
+        </a>
+
+        <a href="#" class="km-cat-link" style="position:relative; display:block; overflow:hidden; text-decoration:none;">
+          <img class="km-cat-img" src="project/assets/team/g3.avif" alt="Šokėjos" style="width:100%; height:clamp(300px,26vw,360px); object-fit:cover; object-position:50% 16%; filter:grayscale(1) contrast(1.05) brightness(.9); display:block; transition:filter .4s ease, transform .5s cubic-bezier(.2,.8,.2,1);">
+          <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(16,16,16,.82) 0%, rgba(16,16,16,0) 50%); pointer-events:none;"></div>
+          <div style="position:absolute; left:18px; right:18px; bottom:16px; display:flex; align-items:baseline; justify-content:space-between; pointer-events:none;">
+            <span style="font-size:15px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; color:#F4F1EA;">Šokėjos</span>
+            <span style="font-family:'Chakra Petch',sans-serif; font-weight:700; font-size:15px; color:#D32528;">03</span>
+          </div>
+        </a>
+
+        <a href="#" class="km-cat-link" style="position:relative; display:block; overflow:hidden; text-decoration:none;">
+          <img class="km-cat-img" src="project/assets/team/group.jpeg" alt="Laisvalaikis" style="width:100%; height:clamp(300px,26vw,360px); object-fit:cover; object-position:50% 42%; filter:grayscale(1) contrast(1.05) brightness(.9); display:block; transition:filter .4s ease, transform .5s cubic-bezier(.2,.8,.2,1);">
+          <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(16,16,16,.82) 0%, rgba(16,16,16,0) 50%); pointer-events:none;"></div>
+          <div style="position:absolute; left:18px; right:18px; bottom:16px; display:flex; align-items:baseline; justify-content:space-between; pointer-events:none;">
+            <span style="font-size:15px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; color:#F4F1EA;">Laisvalaikis</span>
+            <span style="font-family:'Chakra Petch',sans-serif; font-weight:700; font-size:15px; color:#D32528;">04</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="padding:clamp(64px,8vw,110px) 40px; border-top:1px solid #2A2A28;">
+    <div class="km-split" style="max-width:1260px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:clamp(32px,5vw,72px); align-items:center;">
+      <div>
+        <div style="font-size:12px; font-weight:800; letter-spacing:.14em; color:#D32528; text-transform:uppercase; margin-bottom:18px;">Sirgalių atributika</div>
+        <p style="margin:0; max-width:40ch; font-size:clamp(15px,1.3vw,17px); line-height:1.55; color:#9A9893;">Pasirūpiname ir jūsų sirgalių atributika — <span style="color:#E6E4DF; font-weight:600;">šalikėliai</span>, <span style="color:#E6E4DF; font-weight:600;">kepurės</span>, <span style="color:#E6E4DF; font-weight:600;">marškinėliai</span> ir kita.</p>
+      </div>
+      <div style="justify-self:start;">
+        <p style="margin:0 0 26px; max-width:34ch; font-family:'Archivo',sans-serif; font-weight:500; font-size:clamp(20px,2vw,28px); line-height:1.2; color:#C7C5C0;">Sukursime aprangą, kuri <span style="color:#F4F1EA; font-weight:700;">reprezentuos jūsų komandą.</span></p>
+        <a href="mailto:info@threekickwear.com" class="km-cta-btn" style="display:inline-flex; align-items:center; gap:14px; background:#D32528; color:#F4F1EA; text-decoration:none; font-size:14px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; padding:18px 30px; transition:transform .12s cubic-bezier(.2,.8,.2,1), background-color .15s ease;">Susisiekite <span style="font-size:17px;">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="background:#0A0A0A; color:#76746F; padding:32px 40px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:18px; font-size:12px; font-weight:500; letter-spacing:.03em;">
+    <div style="display:flex; align-items:center; gap:22px; flex-wrap:wrap;">
+      <a href="#" style="color:#76746F; text-decoration:none;">Pirkimo pardavimo taisyklės</a>
+      <a href="#" style="color:#76746F; text-decoration:none;">Privatumo politika</a>
+      <a href="#" style="color:#76746F; text-decoration:none;">Grąžinimas</a>
+    </div>
+    <div style="display:flex; align-items:center; gap:20px; flex-wrap:wrap;">
+      <a href="https://instagram.com" aria-label="Instagram" style="color:#76746F; display:flex; align-items:center;">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5"></rect>
+          <circle cx="12" cy="12" r="4.2"></circle>
+          <circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"></circle>
+        </svg>
+      </a>
+      <a href="mailto:info@threekickwear.com" style="color:#76746F; text-decoration:none;">info@threekickwear.com</a>
+      <a href="tel:+37066181111" style="color:#76746F; text-decoration:none;">+370 661 81111</a>
+    </div>
+  </footer>
+
+</div>
+
+</body>
+</html>
