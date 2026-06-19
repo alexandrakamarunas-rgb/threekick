@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=Archivo:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; overflow:hidden; }
+  @media (max-width:640px){
+    #kc-header{ padding:22px 18px!important; }
+    #kc-nav{ display:none!important; }
+    #kc-menu{ display:flex!important; font-size:19px!important; font-weight:800!important; letter-spacing:.05em!important; }
+    #kc-menu i{ width:26px!important; height:3px!important; }
+    #kc-hmark{ display:none!important; }
+    #kc-cart{ font-size:19px!important; font-weight:800!important; letter-spacing:.05em!important; }
+    #kc-root>img{ top:28%!important; bottom:auto!important; height:72%!important; width:100%!important; object-position:50% 0%!important; }
+    #kc-hero{ object-position:55% 0%!important; }
+    #kc-info{ top:100px!important; left:18px!important; max-width:58%!important; }
+    #kc-info h1{ font-size:25px!important; line-height:1.08!important; }
+    #kc-spec{ font-size:14px!important; margin-top:12px!important; }
+    #kc-desc-d{ display:none!important; }
+    #kc-sizes{ display:none!important; }
+    #kc-desc-m{ display:block!important; position:absolute!important; right:18px!important; top:43%!important; text-align:right!important; font-size:15px!important; font-weight:700!important; max-width:52%!important; z-index:30!important; color:inherit!important; }
+    #kc-pager{ right:18px!important; top:26%!important; }
+    #kc-arrows{ font-size:22px!important; gap:24px!important; }
+    #kc-count{ font-size:42px!important; font-weight:700!important; letter-spacing:-.01em!important; }
+    #kc-cta{ left:auto!important; right:22px!important; bottom:17%!important; width:80px!important; height:80px!important; }
+    #kc-word{ left:50%!important; right:auto!important; transform:translateX(-50%)!important; width:max-content!important; bottom:auto!important; top:60%!important; padding:0!important; gap:44px!important; justify-content:flex-start!important; align-items:baseline!important; justify-content:flex-start!important; align-items:center!important; }
+    #kc-kick{ height:44px!important; }
+    #kc-wearbox{ height:44px!important; }
+    #kc-wear{ font-size:88px!important; }
+    #kc-footer{ padding:0 18px 16px!important; font-size:10px!important; }
+    #kc-foot-left{ gap:16px!important; }
+    #kc-foot-right{ display:none!important; }
+  }
+</style>
+</helmet>
+
+<div ref="{{ rootRef }}" id="kc-root" style="position:relative; width:100%; height:100vh; min-height:560px; overflow:hidden; font-family:'Archivo',sans-serif; background:#0A0A0A; transition:color .35s ease, background-color .45s ease;">
+
+  <!-- PHOTO LAYERS -->
+  <img ref="{{ img0 }}" id="kc-hero" src="assets/hero-cutout.png" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:opacity .5s ease; z-index:1; pointer-events:none;" />
+  <img ref="{{ img1 }}" src="assets/wear-tee-waist.png" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:opacity .5s ease; z-index:1; pointer-events:none;" />
+  <img ref="{{ img2 }}" src="assets/wear-grey-waist.png" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:opacity .5s ease; z-index:1; pointer-events:none;" />
+  <img ref="{{ img3 }}" src="assets/wear-black-waist.png" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:opacity .5s ease; z-index:1; pointer-events:none;" />
+  <img ref="{{ img4 }}" src="assets/wear-vest-waist.png" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:opacity .5s ease; z-index:1; pointer-events:none;" />
+  <img ref="{{ img5 }}" src="assets/wear-hoodie-waist.png" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:opacity .5s ease; z-index:1; pointer-events:none;" />
+  <img ref="{{ img6 }}" src="assets/wear-tee2-waist.png" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:opacity .5s ease; z-index:1; pointer-events:none;" />
+  <img ref="{{ img7 }}" src="assets/wear-guards-trim.png" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:opacity .5s ease; z-index:1; pointer-events:none;" />
+
+  <!-- HEADER -->
+  <header id="kc-header" style="position:absolute; top:0; left:0; right:0; z-index:30; display:flex; align-items:center; justify-content:space-between; padding:26px 40px; color:inherit;">
+    <a id="kc-menu" href="#" style="display:none; align-items:center; gap:12px; color:inherit; text-decoration:none; font-size:13px; font-weight:700; letter-spacing:.08em;">
+      <span style="display:flex; flex-direction:column; gap:4px; width:20px;"><i style="height:2px; background:currentColor; display:block;"></i><i style="height:2px; background:currentColor; display:block;"></i></span>
+      MENIU
+    </a>
+    <nav id="kc-nav" style="display:flex; align-items:center; gap:34px; font-size:13px; font-weight:700; letter-spacing:.08em;">
+      <a href="Vaiduoklis Landing.dc.html" style="color:inherit; text-decoration:none;">HOME</a>
+      <a href="#" style="color:inherit; text-decoration:none;">PARDUOTUVĖ</a>
+      <a href="Komandoms.dc.html" style="color:inherit; text-decoration:none;">KOMANDOMS</a>
+    </nav>
+    <div style="display:flex; align-items:center; gap:30px; font-size:13px; font-weight:700; letter-spacing:.08em;">
+      <span id="kc-hmark" style="display:flex; align-items:flex-start; gap:4px;">
+        <span style="height:17px; aspect-ratio:768/211; background:currentColor; -webkit-mask:url('assets/kick-logo.png') center/contain no-repeat; mask:url('assets/kick-logo.png') center/contain no-repeat; display:block;"></span>
+        <span style="font-size:9px; font-weight:600;">®</span>
+      </span>
+      <a id="kc-cart" href="#" style="color:inherit; text-decoration:none;">KREPŠELIS</a>
+    </div>
+  </header>
+
+  <!-- LEFT INFO STACK -->
+  <div id="kc-info" style="position:absolute; left:40px; top:124px; z-index:30; color:inherit; max-width:320px;">
+    <h1 style="margin:0; font-size:clamp(26px,2.6vw,36px); font-weight:800; line-height:1.02; letter-spacing:-.01em; text-transform:uppercase; white-space:pre-line;">{{ name }}</h1>
+    <div id="kc-spec" style="margin-top:16px; font-size:13px; font-weight:600; line-height:1.45; letter-spacing:.02em;">{{ specB }}</div>
+    <div id="kc-sizes" style="margin-top:18px;">
+      <div style="font-size:11px; font-weight:700; letter-spacing:.12em; margin-bottom:9px; opacity:.8;">DYDŽIŲ TINKLELIS</div>
+      <div style="display:flex; gap:7px; flex-wrap:wrap;">
+        <span style="min-width:34px; text-align:center; padding:7px 4px; border:1px solid currentColor; font-size:12px; font-weight:700; letter-spacing:.03em;">S</span>
+        <span style="min-width:34px; text-align:center; padding:7px 4px; border:1px solid currentColor; font-size:12px; font-weight:700; letter-spacing:.03em;">M</span>
+        <span style="min-width:34px; text-align:center; padding:7px 4px; border:1px solid currentColor; font-size:12px; font-weight:700; letter-spacing:.03em;">L</span>
+        <span style="min-width:34px; text-align:center; padding:7px 4px; border:1px solid currentColor; font-size:12px; font-weight:700; letter-spacing:.03em;">XL</span>
+        <span style="min-width:34px; text-align:center; padding:7px 4px; border:1px solid currentColor; font-size:12px; font-weight:700; letter-spacing:.03em;">XXL</span>
+        <span style="min-width:34px; text-align:center; padding:7px 4px; border:1px solid currentColor; font-size:12px; font-weight:700; letter-spacing:.03em;">XXXL</span>
+      </div>
+    </div>
+    <div id="kc-desc-d" style="margin-top:0;">
+      <div style="width:20px; height:2px; background:currentColor; margin:22px 0 14px;"></div>
+      <p style="margin:0; max-width:240px; font-size:12.5px; font-weight:600; line-height:1.45; letter-spacing:.01em;">{{ desc }}</p>
+    </div>
+  </div>
+
+  <!-- MOBILE DESC (right side) -->
+  <div id="kc-desc-m" style="display:none;">{{ desc }}</div>
+
+  <!-- PAGINATION -->
+  <div id="kc-pager" style="position:absolute; right:40px; top:42%; z-index:30; color:inherit; display:flex; flex-direction:column; align-items:flex-end; gap:14px;">
+    <div id="kc-arrows" style="display:flex; gap:18px; font-size:24px; line-height:1;">
+      <button onClick="{{ prev }}" aria-label="Atgal" style="background:none; border:none; color:inherit; cursor:pointer; padding:4px; font-family:'Archivo',sans-serif;" style-hover="opacity:.5">←</button>
+      <button onClick="{{ next }}" aria-label="Pirmyn" style="background:none; border:none; color:inherit; cursor:pointer; padding:4px; font-family:'Archivo',sans-serif;" style-hover="opacity:.5">→</button>
+    </div>
+    <div id="kc-count" style="font-size:13px; font-weight:600; letter-spacing:.1em; white-space:nowrap;">{{ current }} / {{ total }}</div>
+  </div>
+
+  <!-- CIRCLE CTA -->
+  <button id="kc-cta" onClick="{{ next }}" style="position:absolute; left:54%; bottom:30%; z-index:25; width:128px; height:128px; border-radius:50%; border:1px solid currentColor; background:transparent; color:inherit; cursor:pointer; font-size:30px; line-height:1;" style-hover="opacity:.55">↗</button>
+
+  <!-- FIXED WORDMARK -->
+  <div id="kc-word" style="position:absolute; left:0; right:0; bottom:13%; z-index:20; display:flex; justify-content:space-between; align-items:flex-end; padding:0 24px; pointer-events:none; color:inherit;">
+    <span id="kc-kick" style="height:clamp(58px,8.4vw,132px); aspect-ratio:731/172; background:currentColor; -webkit-mask:url('assets/kick-logo-tight.png') left bottom/contain no-repeat; mask:url('assets/kick-logo-tight.png') left bottom/contain no-repeat; display:block;"></span>
+    <div id="kc-wearbox" style="height:clamp(58px,8.4vw,132px); width:max-content; overflow:hidden;">
+      <div id="kc-wear" style="font-family:'Chakra Petch',sans-serif; font-weight:700; font-size:calc(clamp(58px,8.4vw,132px) * 2); line-height:1; letter-spacing:-.02em; white-space:nowrap; transform:translateY(-0.34em);">wear</div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer id="kc-footer" style="position:absolute; bottom:0; left:0; right:0; z-index:30; padding:0 40px 16px; display:flex; align-items:center; justify-content:space-between; color:inherit; font-size:11px; font-weight:600; letter-spacing:.03em;">
+    <div id="kc-foot-left" style="display:flex; align-items:center; gap:22px; white-space:nowrap;">
+      <a href="#" style="color:inherit; text-decoration:none;">Pirkimo pardavimo taisyklės</a>
+      <a href="#" style="color:inherit; text-decoration:none;">Privatumo politika</a>
+      <a href="#" style="color:inherit; text-decoration:none;">Grąžinimas</a>
+    </div>
+    <div id="kc-foot-right" style="display:flex; align-items:center; gap:20px; white-space:nowrap;">
+      <a href="#" aria-label="Instagram" style="color:inherit; display:flex; align-items:center;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"></rect><circle cx="12" cy="12" r="4.2"></circle><circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"></circle></svg>
+      </a>
+      <a href="mailto:info@threekickwear.com" style="color:inherit; text-decoration:none;">info@threekickwear.com</a>
+      <a href="tel:+37066181111" style="color:inherit; text-decoration:none;">+370 661 81111</a>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:812}}">
+class Component extends DCLogic {
+  state = { idx: 0 };
+  rootRef = React.createRef();
+  imgRefs = [React.createRef(), React.createRef(), React.createRef(), React.createRef(), React.createRef(), React.createRef(), React.createRef(), React.createRef()];
+  slides = [
+    { color:'#F3DE1B', bg:'#D32528', pos:'55% 30%', fit:'cover',   name:'Medvilninis\ndžemperis', specA:'Juoda / M', specB:'Kirpimas: tiesus', desc:'100% medvilnė.' },
+    { color:'#FFFFFF', bg:'#0A0A0A', pos:'center bottom', fit:'contain', name:'Oversize\nmarškinėliai', specA:'Balta / M', specB:'Medvilna 100%', desc:'200 gsm. Heavyweight. Dropped shoulders.' },
+    { color:'#0A0A0A', bg:'#EDEDEA', pos:'center bottom', fit:'contain', name:'Pilkas\nkomplektas', specA:'Pilka / L', specB:'Džemperis su gobtuvu ir kelnės', desc:'Minkštas flisas su šiltu vidumi. Komplektas treniruotėms ir laisvalaikiui.' },
+    { color:'#D32528', bg:'#F2C200', pos:'center bottom', fit:'contain', name:'Juodas\nkomplektas', specA:'Juoda / M', specB:'Džemperis su gobtuvu ir kelnės', desc:'Klasikinis juodas komplektas. Sodri spalva, tvirtos siūlės ir taisyklingas kritimas.' },
+    { color:'#F4F1EA', bg:'#2A211C', pos:'center bottom', fit:'contain', name:'Pūkinė\nliemenė', specA:'Juoda / L', specB:'Liemenė ir kepurė', desc:'Lengvas šiltinimas be rankovių ir vėjui atspari išorė. Sluoksnis šaltoms dienoms.' },
+    { color:'#0A0A0A', bg:'#F2C200', pos:'center bottom', fit:'contain', name:'Raudonas\ndžemperis', specA:'Raudona / M', specB:'Džemperis su gobtuvu', desc:'Klasikinis gobtuvas su priekine kišene. Sodri spalva ir minkštas flisas kasdienai.' },
+    { color:'#FFFFFF', bg:'#0A0A0A', pos:'center bottom', fit:'contain', name:'Marškinėlių\nkomplektas', specA:'Balta / S–XL', specB:'3 vienetai komplekte', desc:'Trys baziniai medvilniniai marškinėliai. 200 gsm ir taisyklingas kritimas. Kasdienė bazė.' },
+    { color:'#FFFFFF', bg:'#3A3A37', pos:'center', fit:'contain', box:{top:'20%',left:'30%',width:'65%',height:'53%'}, name:'Blauzdų\napsaugos', specA:'Balta / Juoda', specB:'Korinė apsauga, 2 poros', desc:'Lengvos, kvėpuoja ir tvirtai laikosi ant blauzdos.' },
+  ];
+
+  apply() {
+    const i = this.state.idx, s = this.slides[i];
+    const r = this.rootRef.current;
+    if (r) { r.style.color = s.color; r.style.backgroundColor = s.bg; }
+    this.imgRefs.forEach((ref, k) => { if (ref.current) ref.current.style.opacity = k === i ? '1' : '0'; });
+
+    // Size grid on all slides except shin guards (idx 7)
+    const sizesEl = document.getElementById('kc-sizes');
+    if (sizesEl) sizesEl.style.display = (i === 7) ? 'none' : '';
+
+    // White tee slide (idx 1): logo + wear in brand red. All viewports.
+    const kickEl = document.getElementById('kc-kick');
+    const wearEl = document.getElementById('kc-wear');
+    if (kickEl && wearEl) {
+      if (i === 1) {
+        kickEl.style.setProperty('background', '#D32528', 'important');
+        wearEl.style.setProperty('color', '#D32528', 'important');
+      } else {
+        kickEl.style.setProperty('background', 'currentColor');
+        wearEl.style.removeProperty('color');
+      }
+    }
+
+    const isMobile = window.matchMedia && window.matchMedia('(max-width:640px)').matches;
+    if (isMobile) {
+      // Desc side: right only on slide 0 (red hero), left on all others
+      const descD = document.getElementById('kc-desc-d');
+      const descM = document.getElementById('kc-desc-m');
+      if (descD && descM) {
+        if (i === 0) {
+          descD.style.setProperty('display', 'none', 'important');
+          descM.style.setProperty('display', 'block', 'important');
+        } else {
+          descD.style.setProperty('display', 'block', 'important');
+          descM.style.setProperty('display', 'none', 'important');
+        }
+      }
+    }
+  }
+  go(dir) {
+    const n = this.slides.length;
+    this.setState(s => ({ idx: (s.idx + dir + n) % n }), () => this.apply());
+  }
+  componentDidMount() {
+    this.imgRefs.forEach((ref, k) => {
+      if (ref.current) {
+        ref.current.style.objectPosition = this.slides[k].pos;
+        ref.current.style.objectFit = this.slides[k].fit;
+        const box = this.slides[k].box;
+        if (box) {
+          ref.current.style.top = box.top;
+          ref.current.style.left = box.left;
+          ref.current.style.right = 'auto';
+          ref.current.style.bottom = 'auto';
+          ref.current.style.width = box.width;
+          ref.current.style.height = box.height;
+        }
+      }
+    });
+    this.apply();
+    this._wheel = (e) => {
+      e.preventDefault();
+      if (this._lock) return;
+      this._lock = true;
+      this.go(e.deltaY > 0 ? 1 : -1);
+      setTimeout(() => { this._lock = false; }, 650);
+    };
+    this._key = (e) => {
+      if (e.key === 'ArrowRight') this.go(1);
+      else if (e.key === 'ArrowLeft') this.go(-1);
+    };
+    if (this.rootRef.current) this.rootRef.current.addEventListener('wheel', this._wheel, { passive: false });
+    window.addEventListener('keydown', this._key);
+  }
+  componentWillUnmount() {
+    if (this.rootRef.current) this.rootRef.current.removeEventListener('wheel', this._wheel);
+    window.removeEventListener('keydown', this._key);
+  }
+  renderVals() {
+    const s = this.slides[this.state.idx];
+    return {
+      rootRef: this.rootRef,
+      img0: this.imgRefs[0], img1: this.imgRefs[1], img2: this.imgRefs[2], img3: this.imgRefs[3], img4: this.imgRefs[4], img5: this.imgRefs[5], img6: this.imgRefs[6], img7: this.imgRefs[7],
+      current: String(this.state.idx + 1).padStart(2, '0'),
+      total: String(this.slides.length).padStart(2, '0'),
+      name: s.name, specA: s.specA, specB: s.specB, desc: s.desc,
+      prev: () => this.go(-1), next: () => this.go(1),
+    };
+  }
+}
+</script>
+</body>
+</html>
