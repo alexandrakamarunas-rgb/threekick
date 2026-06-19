@@ -31,6 +31,7 @@
   @media (max-width:520px){
     .km-cats{ grid-template-columns:1fr!important; }
     .km-nav-links{ display:none!important; }
+    .km-menu-btn{ display:flex!important; }
   }
 </style>
 </head>
@@ -38,8 +39,25 @@
 
 <div style="font-family:'Archivo',sans-serif; background:#101010; color:#CBC9C4; -webkit-font-smoothing:antialiased;">
 
+  <!-- MOBILE NAV OVERLAY -->
+  <div id="km-mobile-nav" style="display:none; position:fixed; inset:0; z-index:200; background:#0A0A0A; color:#EDEDEA; flex-direction:column; padding:0 24px;">
+    <div style="display:flex; justify-content:space-between; align-items:center; height:64px; border-bottom:1px solid #2a2a2a; margin-bottom:8px;">
+      <span style="font-size:13px; font-weight:700; letter-spacing:.08em; color:#7E7C77;">MENIU</span>
+      <button onclick="kmToggleMenu()" style="background:none; border:none; color:#EDEDEA; font-size:32px; line-height:1; cursor:pointer; padding:4px;">×</button>
+    </div>
+    <a href="index.html" style="color:#EDEDEA; text-decoration:none; font-size:28px; font-weight:800; letter-spacing:.03em; padding:18px 0; border-bottom:1px solid #1a1a1a;">HOME</a>
+    <a href="parduotuve.html" style="color:#EDEDEA; text-decoration:none; font-size:28px; font-weight:800; letter-spacing:.03em; padding:18px 0; border-bottom:1px solid #1a1a1a;">PARDUOTUVĖ</a>
+    <a href="komandoms.html" style="color:#EDEDEA; text-decoration:none; font-size:28px; font-weight:800; letter-spacing:.03em; padding:18px 0; border-bottom:1px solid #1a1a1a;">KOMANDOMS</a>
+  </div>
+
   <!-- HEADER -->
   <header style="position:sticky; top:0; z-index:50; display:flex; align-items:center; justify-content:space-between; padding:22px 40px; background:rgba(16,16,16,.9); backdrop-filter:blur(6px);">
+    <button class="km-menu-btn" onclick="kmToggleMenu()" style="display:none; align-items:center; gap:8px; background:none; border:none; cursor:pointer; color:#7E7C77; font-family:'Archivo',sans-serif; font-size:13px; font-weight:700; letter-spacing:.08em; padding:0;">
+      <svg width="20" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="0" y1="2" x2="20" y2="2"/><line x1="0" y1="8" x2="20" y2="8"/><line x1="0" y1="14" x2="20" y2="14"/>
+      </svg>
+      MENIU
+    </button>
     <nav class="km-nav-links" style="display:flex; align-items:center; gap:30px; font-size:12px; font-weight:700; letter-spacing:.1em;">
       <a href="index.html" style="color:#7E7C77; text-decoration:none;">HOME</a>
       <a href="parduotuve.html" style="color:#7E7C77; text-decoration:none;">PARDUOTUVĖ</a>
@@ -212,6 +230,14 @@
   </footer>
 
 </div>
+
+<script>
+let kmMenuOpen = false;
+function kmToggleMenu() {
+  kmMenuOpen = !kmMenuOpen;
+  document.getElementById('km-mobile-nav').style.display = kmMenuOpen ? 'flex' : 'none';
+}
+</script>
 
 </body>
 </html>

@@ -1,5 +1,5 @@
 <?php
-$secret_key = 'sk_live_ВСТАВЬ_СЮДА';
+require __DIR__ . '/config.php';
 
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
